@@ -14,6 +14,14 @@ app.get('/',function(req,res){
     res.send('Hello World!')
 })
 
+app.get('/route',function(req,res){
+    res.json({
+        name:"samrat",
+        age:21,
+        occupation:"graduated"
+    })
+})
+
 
 app.listen(port, ()=>{
     console.log(`Example app is listening on ${port}`)
