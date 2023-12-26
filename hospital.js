@@ -61,7 +61,6 @@ app.post("/", function (req, res) {
   });
 });
 
-
 /**
  * PUT method is modify data to a certain level...
  * PATCH is used to modify a patch of data like put not whole content;
@@ -75,12 +74,24 @@ app.put("/", function (req, res) {
 
 /**
  * DELETE method is used to delete data
+ * add a method if zero kidneys dont delete it
  */
 
+app.delete("/", function (req, res) {
+  let newKidneys = [];
 
-app.delete("/",function(req,res){
-
-})
+  for (let i = 0; i < users[0].kidneys.length; i++) {
+    if (users[0].kidneys[i].length) {
+      newKidneys.push({
+        healthy: true,
+      });
+    }
+  }
+  users[0].kidneys = newKidneys;
+  res.json({
+    msg: "done",
+  });
+});
 
 app.listen(port, function () {
   console.log(`app listening  ${port}`);
