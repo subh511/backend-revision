@@ -30,6 +30,8 @@ const port = 3000;
 
 const app = express();
 
+app.use(express.json());
+
 let users = [
   {
     name: "jhon",
@@ -42,24 +44,34 @@ let users = [
 ];
 
 app.get("/", function (req, res) {
-
   let jhonKidneys = users[0].kidneys;
   let numberOfKidneys = jhonKidneys.length;
   let numberHealthyKidney = 0;
 
-  for(let i=0; i<jhonKidneys.length; i++){
-    if(jhonKidneys[i].length){
+  for (let i = 0; i < jhonKidneys.length; i++) {
+    if (jhonKidneys[i].length) {
       numberHealthyKidney = numberHealthyKidney + 1;
     }
   }
 
-  let numberOfUnhealthyKidneys = numberOfKidneys - numberHealthyKidney
+  let numberOfUnhealthyKidneys = numberOfKidneys - numberHealthyKidney;
 
   res.json({
     numberOfUnhealthyKidneys,
     numberOfKidneys,
-    numberHealthyKidney
-  })
+    numberHealthyKidney,
+  });
+});
+
+app.post("/", function (req, res) {
+  console.log(req.body);
+  let isHealthy = req.body.isHealthy;
+  users[0].kidneys.push({
+    healthy: isHealthy,
+  });
+  res.json({
+    msg: "done!",
+  });
 });
 
 app.listen(port, function () {
