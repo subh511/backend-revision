@@ -74,12 +74,27 @@ app.post("/", function (req, res) {
   });
 });
 
-app.put("/",function(req,res){
-  for(let i=0; i<users[0].kidneys.length; i++){
+app.put("/", function (req, res) {
+  for (let i = 0; i < users[0].kidneys.length; i++) {
     users[0].kidneys.healthy = true;
   }
-  res.json({})
-})
+  res.json({});
+});
+
+app.delete("/", function (req, res) {
+  let newKidneys = [];
+  for (let i = 0; i < users[0].kidneys.length; i++) {
+    if (users[0].kidneys[i].length) {
+      newKidneys.push({
+        healthy: true,
+      });
+    }
+  }
+  users[0].kidneys = newKidneys;
+  res.json({
+    msg: "done",
+  });
+});
 
 app.listen(port, function () {
   console.log(`app listening on port ${port}`);

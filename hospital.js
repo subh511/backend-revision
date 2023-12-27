@@ -74,7 +74,7 @@ app.put("/", function (req, res) {
 
 /**
  * DELETE method is used to delete data
- * add a method if zero kidneys dont delete it
+ * add a method if zero kidneys dont delete
  */
 
 app.delete("/", function (req, res) {
