@@ -74,6 +74,13 @@ app.post("/", function (req, res) {
   });
 });
 
+app.put("/",function(req,res){
+  for(let i=0; i<users[0].kidneys.length; i++){
+    users[0].kidneys.healthy = true;
+  }
+  res.json({})
+})
+
 app.listen(port, function () {
   console.log(`app listening on port ${port}`);
 });
