@@ -13,6 +13,14 @@ app.post("/health-checkup", function (req, res) {
   res.send("your kidney length " + kidneysLength);
 });
 
+//global catches
+
+app.use(function(err,req,res,next){
+    res.json({
+        msg:"sorry something is up with the server"
+    })
+})
+
 app.listen(port, function () {
   console.log(`app listening on ${port}`);
 });
