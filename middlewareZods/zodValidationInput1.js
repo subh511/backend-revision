@@ -13,3 +13,5 @@ validateInput({
     email:"sam@gmail.com",
     password: "12345678"
 });
+
+//basically how to post
