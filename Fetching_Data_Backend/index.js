@@ -24,7 +24,14 @@ const ALL_USERS = [
 
 function userExists(username, password) {
   //write logic to return true or false if this user exists
-  //in ALL_Users array
+  //in ALL_Users array;
+  let userExists = false;
+  for(let i=0; i<ALL_USERS.length; i++){
+    if(ALL_USERS[i].username == username && ALL_USERS[i].password == password){
+      userExists = true;
+    }
+  }
+  return userExists;
 }
 
 app.post("/signin", function (req, res) {
@@ -33,11 +40,11 @@ app.post("/signin", function (req, res) {
 
   if (!userExists(username, password)) {
     return res.status(403).json({
-      msg: "User doesnt exist in our memory db",
+      msg: "User doesn't exist in our memory db",
     });
   }
 
-  var token = jwt.sign({ username: username }, "shhhh");
+  var token = jwt.sign({ username: username }, jwtPassword);
   return res.json({
     token,
   });
