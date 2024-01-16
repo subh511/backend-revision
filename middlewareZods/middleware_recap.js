@@ -13,7 +13,7 @@ const port = 3000;
 //   }
 // }
 
-//prog-1; 
+//prog-1;
 //prog-2; modified & introduced query Function;
 
 // app.get("/ride1", function (req, res) {
@@ -40,29 +40,34 @@ const port = 3000;
 //     }
 //   });
 
-
-function isOldEnough(req,res,next){
-    const age = req.query.age;
-    if(age>=14){
-        next()
-    }else{
-        res.json({
-            msg:"Sorry you are under age"
-        })
-    }
+function isOldEnough(req, res, next) {
+  const age = req.query.age;
+  if (age >= 14) {
+    next();
+  } else {
+    res.json({
+      msg: "Sorry you are under age",
+    });
+  }
 }
 
-app.get("/ride1", isOldEnough, function (req, res) {
-    res.json({
-      msg: "you have successfully ridden the ride",
-    });
+app.use(isOldEnough);
+//this app.use(isoldEnough) needs to be call only on top of middleware nowhere else;
+//it excute the middleware down the stream;
+
+// isoldEnough can be invoked in between function and it somewhat gud it doestn't follow strict pattern
+
+app.get("/ride1", function (req, res) {
+  res.json({
+    msg: "you have successfully ridden the ride",
+  });
 });
 
-app.get("/ride2", isOldEnough, function (req, res) {
-      res.json({
-        msg: "you have successfully ridden the ride",
-      });
+app.get("/ride2", function (req, res) {
+  res.json({
+    msg: "you have successfully ridden the ride",
   });
+});
 
 app.listen(port, function () {
   console.log(`app listening in ${port}`);
